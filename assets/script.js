@@ -1,19 +1,4 @@
-// localStorage loop 
-if (localStorage.getItem("ids")!== null){
-    var idArray = JSON.parse(localStorage.getItem("ids"))
-    var contentArray = JSON.parse(localStorage.getItem("content"))
-    for (let i = 0; i<idArray.length;i++){
-        $("#" + idArray[i]).text(contentArray[i])
-    // get data from local storage
 
-
-    // if a row has an associated event, populate it
-    }
-}
-else {
-var idArray = []
-var contentArray = []
-}
 // get date and time
 rawDate = new Date();
 console.log(rawDate);
@@ -106,6 +91,26 @@ for (let i = 0; i < 9; i++){
         currentRow.attr("class", "future")
     }
 }
+// check if a day has passed since last use. If so, clear local storage
+if (localStorage.getItem("date") !== currentDayofMonth+currentMonth+currentYear){
+    localStorage.clear();
+}
+
+
+
+localStorage.setItem("date", (currentDayofMonth+currentMonth+currentYear));
+// localStorage loop for populating items 
+if (localStorage.getItem("ids")!== null){
+    var idArray = JSON.parse(localStorage.getItem("ids"))
+    var contentArray = JSON.parse(localStorage.getItem("content"))
+    for (let i = 0; i<idArray.length;i++){
+        $("#" + idArray[i]).text(contentArray[i])
+    }
+}
+else {
+var idArray = []
+var contentArray = []
+}
 
 
 // add event listener for save button
@@ -129,7 +134,7 @@ $(".fas").on("click", function(){
     if (idArray.length < 1){
         idArray = [currentid]
     }
-    else {
+    else{
         idArray.push(currentid)
     }
 
