@@ -72,6 +72,8 @@ textarea{
 
 .buttoncontainer {
   background: #007bff;
+  text-align: center;
+  margin: auto;
 }
 
 .table-bordered{
@@ -81,4 +83,9 @@ textarea{
 
 textarea {
   width: 100%;
+}
+
+.fas{
+  margin: auto;
+  text-align: center;
 }

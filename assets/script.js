@@ -1,3 +1,7 @@
+// get data from local storage
+// if a row has an associated event, populate it
+
+
 // get date and time
 rawDate = new Date();
 console.log(rawDate);
@@ -75,7 +79,7 @@ $("#currentDay").text(parsedDate);
 for (let i = 0; i < 9; i++){
     rows = $("[data-hour]");
     currentRow = rows.eq(i);
-    console.log($(currentRow));
+    //console.log($(currentRow));
 
     //if the hour data is less than the current hour, assign .past class to that tr
     if (currentRow.attr("data-hour") < currentHour){
@@ -90,3 +94,28 @@ for (let i = 0; i < 9; i++){
         currentRow.attr("class", "future")
     }
 }
+
+
+// add event listener for save button
+$(".fas").on("click", function(){
+    // navigate to sibling
+    parent = $(this).parent();
+    //console.log(parent);
+    sibling = $(parent).siblings();
+    //console.log(sibling);
+    textAreaParent = $(sibling).eq(1)
+    textAreaChildren = $(textAreaParent).children();
+    textAreaFirstChild = $(textAreaChildren).eq(0);
+    //console.log ($(textAreaFirstChild).attr("class"))
+
+    // get value of sibling
+
+    let currentid = textAreaFirstChild.attr("id")
+    textToConvert = $(textAreaFirstChild).val();
+    //console.log(textToConvert)
+
+    // save value of sibling to local storage
+    localStorage.setItem(currentid, textToConvert)
+});
+
+//save value of text to local storage
