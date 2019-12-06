@@ -73,11 +73,20 @@ parsedDate = (currentDayofWeek + " " + currentMonth + " " + currentDayofMonth + 
 $("#currentDay").text(parsedDate);
 //iterate through hour blocks
 for (let i = 0; i < 9; i++){
+    rows = $("[data-hour]");
+    currentRow = rows.eq(i);
+    console.log($(currentRow));
 
+    //if the hour data is less than the current hour, assign .past class to that tr
+    if (currentRow.attr("data-hour") < currentHour){
+        currentRow.attr("class", "past")
+    }
+    // if the hour data is equivalent to the current hour, assign.present
+    else if (currentRow.attr("data-hour") == currentHour){
+        currentRow.attr("class", "present")
+    }
+    //else, assign .future
+    else{
+        currentRow.attr("class", "future")
+    }
 }
-//if the hour data is less than the current hour, assign .past class to that tr
-
-// if the hour data is equivalent to the current hour, assign.present
-
-//else, assign .future
-

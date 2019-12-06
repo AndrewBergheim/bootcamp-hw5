@@ -78,3 +78,7 @@ textarea{
   margin: auto;
   width: 80%;
 }
+
+textarea {
+  width: 100%;
+}
