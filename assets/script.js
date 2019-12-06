@@ -1,7 +1,19 @@
-// get data from local storage
-// if a row has an associated event, populate it
+// localStorage loop 
+if (localStorage.getItem("ids")!== null){
+    var idArray = JSON.parse(localStorage.getItem("ids"))
+    var contentArray = JSON.parse(localStorage.getItem("content"))
+    for (let i = 0; i<idArray.length;i++){
+        $("#" + idArray[i]).text(contentArray[i])
+    // get data from local storage
 
 
+    // if a row has an associated event, populate it
+    }
+}
+else {
+var idArray = []
+var contentArray = []
+}
 // get date and time
 rawDate = new Date();
 console.log(rawDate);
@@ -99,23 +111,38 @@ for (let i = 0; i < 9; i++){
 // add event listener for save button
 $(".fas").on("click", function(){
     // navigate to sibling
-    parent = $(this).parent();
+    let parent = $(this).parent();
     //console.log(parent);
-    sibling = $(parent).siblings();
+    let sibling = $(parent).siblings();
     //console.log(sibling);
-    textAreaParent = $(sibling).eq(1)
-    textAreaChildren = $(textAreaParent).children();
-    textAreaFirstChild = $(textAreaChildren).eq(0);
+    let textAreaParent = $(sibling).eq(1)
+    let textAreaChildren = $(textAreaParent).children();
+    let textAreaFirstChild = $(textAreaChildren).eq(0);
     //console.log ($(textAreaFirstChild).attr("class"))
 
     // get value of sibling
 
     let currentid = textAreaFirstChild.attr("id")
-    textToConvert = $(textAreaFirstChild).val();
+    let textToConvert = $(textAreaFirstChild).val();
     //console.log(textToConvert)
+// add ids and content to arrays
+    if (idArray.length < 1){
+        idArray = [currentid]
+    }
+    else {
+        idArray.push(currentid)
+    }
 
-    // save value of sibling to local storage
-    localStorage.setItem(currentid, textToConvert)
+
+    if (contentArray == undefined){
+        contentArray = [textToConvert]
+    }
+    else {
+        contentArray.push(textToConvert)
+    }
+    // save arrays to local storage
+    localStorage.setItem("ids", JSON.stringify(idArray))
+    localStorage.setItem("content", JSON.stringify(contentArray))
 });
 
 //save value of text to local storage
